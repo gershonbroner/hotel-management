@@ -35,9 +35,33 @@ const UserDetails = (props: { params: { id: string } }) => {
   const toggleRatingModal = () => setIsRatingVisible(prevState => !prevState);
 
   const reviewSubmitHandler = async () => {
-    console.log(ratingText,ratingValue);
-    
-  }
+    if (!ratingText.trim().length || !ratingValue) {
+      return toast.error('Please provide a rating text and a rating');
+    }
+
+    if (!roomId) toast.error('Id not provided');
+
+    setIsSubmittingReview(true)
+
+    try {
+      const { data } = await axios.post('/api/users', {
+        reviewText: ratingText,
+        ratingValue,
+        roomId,
+      });
+      console.log(data);
+      toast.success('Review Submitted');
+    } catch (error) {
+      console.log(error);
+      toast.error('Review Failed');
+    } finally {
+      setRatingText('');
+      setRatingValue(null);
+      setRoomId(null);
+      setIsSubmittingReview(false);
+      setIsRatingVisible(false);
+    }
+  };
 
   const fetchUserBooking = async () => getUserBookings(userId);
   const fetchUserData = async () => {
