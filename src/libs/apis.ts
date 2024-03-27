@@ -198,15 +198,15 @@ export const createReview = async ({
   return data;
 };
 
-// export async function getRoomReviews(roomId: string) {
-//   const result = await sanityClient.fetch<Review[]>(
-//     queries.getRoomReviewsQuery,
-//     {
-//       roomId,
-//     },
-//     { cache: 'no-cache' }
-//   );
+export async function getRoomReviews(roomId: string) {
+  const result = await sanityClient.fetch<Review[]>(
+    queries.getRoomReviewsQuery,
+    {
+      roomId,
+    },
+    { cache: 'no-cache' }
+  );
 
-//   return result;
-// }
+  return result;
+}
  
