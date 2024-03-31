@@ -13,7 +13,7 @@ const Rooms = () => {
   const [roomTypeFilter, setRoomTypeFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const searchParams = useSearchParams();
-
+//hi
   useEffect(() => {
     const searchQuery = searchParams.get('searchQuery');
     const roomType = searchParams.get('roomType');
