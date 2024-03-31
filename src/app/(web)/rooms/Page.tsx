@@ -7,7 +7,7 @@ import useSWR from 'swr';
 import { getRooms } from '@/libs/apis';
 import { Room } from '@/models/room';
 import Search from '@/components/Search/Search';
-import RoomCard from '@/components/RommCard/RommCard';
+import RoomCard  from '@/components/RoomCard/RoomCard'
 
 const Rooms = () => {
   const [roomTypeFilter, setRoomTypeFilter] = useState('');
@@ -20,7 +20,7 @@ const Rooms = () => {
 
     if (roomType) setRoomTypeFilter(roomType);
     if (searchQuery) setSearchQuery(searchQuery);
-  }, [searchParams]);
+  }, []);
 
   async function fetchData() {
     return getRooms();
@@ -31,11 +31,11 @@ const Rooms = () => {
   if (error) throw new Error('Cannot fetch data');
   if (typeof data === 'undefined' && !isLoading)
     throw new Error('Cannot fetch data');
- 
 
   const filterRooms = (rooms: Room[]) => {
     return rooms.filter(room => {
-     
+      // Apply room type filter
+
       if (
         roomTypeFilter &&
         roomTypeFilter.toLowerCase() !== 'all' &&
@@ -44,7 +44,7 @@ const Rooms = () => {
         return false;
       }
 
-     
+      //   Apply search query filter
       if (
         searchQuery &&
         !room.name.toLowerCase().includes(searchQuery.toLowerCase())
